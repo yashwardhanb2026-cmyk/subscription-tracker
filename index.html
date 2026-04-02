@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | Premium Subscription Tracking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed": "#3e4040",
+              "on-error-container": "#ff9993",
+              "secondary-fixed": "#ffdad5",
+              "inverse-on-surface": "#565556",
+              "on-secondary": "#4a0002",
+              "surface-container": "#19191b",
+              "surface-container-low": "#131315",
+              "primary-container": "#454747",
+              "on-surface-variant": "#acaaae",
+              "on-primary-fixed-variant": "#5a5c5c",
+              "inverse-surface": "#fcf8f9",
+              "on-primary-container": "#d0d0d0",
+              "surface-tint": "#c6c6c7",
+              "on-error": "#490106",
+              "secondary-fixed-dim": "#ffc7c0",
+              "error-dim": "#bb5551",
+              "outline": "#767578",
+              "error-container": "#7f2927",
+              "on-secondary-container": "#ffa99e",
+              "error": "#ee7d77",
+              "surface-variant": "#252628",
+              "secondary": "#ff7162",
+              "on-tertiary-container": "#005f26",
+              "surface-container-high": "#1f1f22",
+              "primary-fixed": "#e2e2e2",
+              "on-secondary-fixed-variant": "#bb000c",
+              "primary-dim": "#b8b9b9",
+              "secondary-dim": "#ff7162",
+              "surface-container-lowest": "#000000",
+              "tertiary": "#c6ffc7",
+              "tertiary-container": "#72fe8f",
+              "background": "#0e0e0f",
+              "on-tertiary-fixed-variant": "#006a2b",
+              "outline-variant": "#48484b",
+              "primary-fixed-dim": "#d4d4d4",
+              "on-primary": "#3f4041",
+              "on-surface": "#e7e5e8",
+              "surface-container-highest": "#252628",
+              "on-tertiary-fixed": "#004a1c",
+              "tertiary-fixed-dim": "#63ef82",
+              "primary": "#c6c6c7",
+              "surface-bright": "#2b2c2f",
+              "on-background": "#e7e5e8",
+              "tertiary-dim": "#63ef82",
+              "on-secondary-fixed": "#850005",
+              "surface-dim": "#0e0e0f",
+              "tertiary-fixed": "#72fe8f",
+              "secondary-container": "#7e0005",
+              "on-tertiary": "#00692a",
+              "inverse-primary": "#5e5f60",
+              "surface": "#0e0e0f"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0e0e0f; color: #e7e5e8; -webkit-font-smoothing: antialiased; }
+        .glass { background: rgba(43, 44, 47, 0.4); backdrop-filter: saturate(180%) blur(20px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/40 dark:bg-[#2b2c2f]/40 backdrop-blur-xl backdrop-saturate-[1.8]">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-black tracking-tighter text-[#e7e5e8] dark:text-[#e7e5e8]">
+                The Curator
+            </div>
+<div class="hidden md:flex items-center gap-8 font-['Inter'] tracking-tight font-medium text-sm">
+<a class="text-[#e7e5e8]/60 hover:text-[#e7e5e8] transition-colors" href="#">Archive</a>
+<a class="text-[#e7e5e8]/60 hover:text-[#e7e5e8] transition-colors" href="#">Insights</a>
+<a class="text-[#e7e5e8]/60 hover:text-[#e7e5e8] transition-colors" href="#">Marketplace</a>
+<a class="text-[#e7e5e8]/60 hover:text-[#e7e5e8] transition-colors" href="#">Pricing</a>
+</div>
+<a href="/dashboard.html" class="bg-primary text-on-primary px-6 py-2.5 rounded-full text-sm font-bold scale-95 active:scale-90 transition-transform hover:shadow-[0_0_40px_rgba(198,198,199,0.15)] inline-block">
+                Go to Dashboard
+            </a>
+</div>
+</nav>
+<main class="relative pt-32 pb-24 overflow-hidden">
+<!-- Storytelling Intro -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="relative">
+<h1 class="text-7xl md:text-[120px] font-extrabold tracking-[-0.04em] leading-[0.9] text-on-surface mb-8">
+                    Control your <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-container">digital curator.</span>
+</h1>
+<p class="max-w-xl text-lg md:text-xl text-on-surface-variant leading-relaxed">
+                    A cinematic archive for your digital lifestyle. Manage every subscription with the precision of a curator and the fluidity of light.
+                </p>
+</div>
+</section>
+<!-- Hero Bento Grid / Cards -->
+<section class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Netflix Card -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-container p-8 h-80 flex flex-col justify-between transition-all duration-500 hover:translate-y-[-8px]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-[#E50914]/20 blur-[60px] rounded-full -mr-10 -mt-10 group-hover:bg-[#E50914]/30 transition-colors"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-4xl text-[#E50914]" style="font-variation-settings: 'FILL' 1;">movie</span>
+<span class="text-[10px] font-bold tracking-[0.1em] text-on-surface-variant uppercase">Entertainment</span>
+</div>
+<h3 class="text-2xl font-bold text-on-surface">Netflix</h3>
+<p class="text-sm text-on-surface-variant mt-1">Premium 4K Plan</p>
+</div>
+<div class="relative z-10 flex items-baseline gap-1">
+<span class="text-4xl font-bold tracking-tighter">$19.99</span>
+<span class="text-xs text-on-surface-variant font-medium">/mo</span>
+</div>
+</div>
+<!-- Spotify Card -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-container p-8 h-80 flex flex-col justify-between transition-all duration-500 hover:translate-y-[-8px]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-[#1DB954]/20 blur-[60px] rounded-full -mr-10 -mt-10 group-hover:bg-[#1DB954]/30 transition-colors"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-4xl text-[#1DB954]" style="font-variation-settings: 'FILL' 1;">music_note</span>
+<span class="text-[10px] font-bold tracking-[0.1em] text-on-surface-variant uppercase">Audio</span>
+</div>
+<h3 class="text-2xl font-bold text-on-surface">Spotify</h3>
+<p class="text-sm text-on-surface-variant mt-1">Family Premium</p>
+</div>
+<div class="relative z-10 flex items-baseline gap-1">
+<span class="text-4xl font-bold tracking-tighter">$16.99</span>
+<span class="text-xs text-on-surface-variant font-medium">/mo</span>
+</div>
+</div>
+<!-- Amazon Prime Card -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-container p-8 h-80 flex flex-col justify-between transition-all duration-500 hover:translate-y-[-8px]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-[#00A8E1]/20 blur-[60px] rounded-full -mr-10 -mt-10 group-hover:bg-[#00A8E1]/30 transition-colors"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-4xl text-[#00A8E1]" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="text-[10px] font-bold tracking-[0.1em] text-on-surface-variant uppercase">Lifestyle</span>
+</div>
+<h3 class="text-2xl font-bold text-on-surface">Amazon Prime</h3>
+<p class="text-sm text-on-surface-variant mt-1">Prime Video + Delivery</p>
+</div>
+<div class="relative z-10 flex items-baseline gap-1">
+<span class="text-4xl font-bold tracking-tighter">$14.99</span>
+<span class="text-xs text-on-surface-variant font-medium">/mo</span>
+</div>
+</div>
+<!-- Disney+ Card -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-container p-8 h-80 flex flex-col justify-between transition-all duration-500 hover:translate-y-[-8px]">
+<div class="absolute top-0 right-0 w-32 h-32 bg-[#ffffff]/10 blur-[60px] rounded-full -mr-10 -mt-10 group-hover:bg-[#ffffff]/20 transition-colors"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-4xl text-[#e2e2e2]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-[10px] font-bold tracking-[0.1em] text-on-surface-variant uppercase">Magic</span>
+</div>
+<h3 class="text-2xl font-bold text-on-surface">Disney+</h3>
+<p class="text-sm text-on-surface-variant mt-1">Marvel &amp; Star Wars</p>
+</div>
+<div class="relative z-10 flex items-baseline gap-1">
+<span class="text-4xl font-bold tracking-tighter">$13.99</span>
+<span class="text-xs text-on-surface-variant font-medium">/mo</span>
+</div>
+</div>
+</section>
+<!-- Asymmetric Value Section -->
+<section class="mt-48 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<div class="relative order-2 lg:order-1">
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="relative space-y-8">
+<div class="bg-surface-container-low p-8 rounded-2xl border border-outline-variant/10 shadow-2xl">
+<div class="flex justify-between items-end mb-12">
+<div>
+<p class="text-[10px] font-bold tracking-[0.2em] text-on-surface-variant uppercase mb-2">Monthly Spend</p>
+<p class="text-6xl font-black tracking-tighter">$142.84</p>
+</div>
+<div class="text-right">
+<p class="text-xs text-tertiary font-bold">+2.4% vs last month</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-3/4 bg-gradient-to-r from-secondary to-secondary-dim rounded-full"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold tracking-widest text-on-surface-variant">
+<span>LIMIT: $200.00</span>
+<span>71% REACHED</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-6 rounded-xl">
+<span class="material-symbols-outlined text-secondary mb-3">notifications_active</span>
+<p class="text-sm font-bold">Upcoming: HBO Max</p>
+<p class="text-xs text-on-surface-variant mt-1">Tomorrow • $15.99</p>
+</div>
+<div class="bg-surface-container p-6 rounded-xl">
+<span class="material-symbols-outlined text-tertiary mb-3">insights</span>
+<p class="text-sm font-bold">Potential Savings</p>
+<p class="text-xs text-on-surface-variant mt-1">$42.00/yr identified</p>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="text-5xl md:text-6xl font-bold tracking-tighter leading-tight mb-8">
+                    Intelligent insights. <br/>
+<span class="text-on-surface-variant">Quietly powerful.</span>
+</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed mb-12">
+                    The Curator analyzes your spending patterns to identify overlaps, price hikes, and forgotten trials. It doesn't just track; it protects your digital economy.
+                </p>
+<div class="flex flex-col gap-6">
+<div class="flex gap-4 items-start">
+<div class="p-2 bg-surface-container-high rounded-lg">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Precision Analytics</p>
+<p class="text-sm text-on-surface-variant">Deep dives into category spending across entertainment, productivity, and lifestyle.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="p-2 bg-surface-container-high rounded-lg">
+<span class="material-symbols-outlined text-primary">lock</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Subscription Vault</p>
+<p class="text-sm text-on-surface-variant">Securely store your billing details and cancellation links in one encrypted gallery.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Gallery Layout -->
+<section class="mt-48 px-8 max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-16">
+<div>
+<p class="text-xs font-bold tracking-[0.3em] text-primary uppercase mb-4">Collection 01</p>
+<h2 class="text-5xl font-bold tracking-tighter">The Visual Archive.</h2>
+</div>
+<button class="hidden md:flex items-center gap-2 text-sm font-bold text-on-surface hover:text-primary transition-colors">
+                    Explore Marketplace <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-[800px]">
+<div class="md:col-span-8 relative overflow-hidden rounded-2xl group">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="cinematic close-up of high-end dark electronic gadgets on a minimalist desk with soft moody blue and purple ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgQlDgN5j2P7q8Fg9hq8kADDFZhuVKaG32_TNb_Kv3BZoUebXwp_DqR_rHKJ0_qTmr6BNP8Wynixy6NyZ3lFbPcfLBvRRoMeE-Gsq85V4LbaXwZU4CALRTBO7WXy242LdRMhX3DA_A_DdpG-onmdBzR5YwSaKKUCCC0pO9yX3scn61SlXDbitvS1M8SXzRgIz-DtOs___thRtL-vjL-wsZLkf39DkA6WgF5xVosoQXTUtxl9pOJku_CToXqxF84X-Y6ZqVVVPdvlzI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent"></div>
+<div class="absolute bottom-12 left-12">
+<span class="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest mb-4 inline-block">Curated Tech</span>
+<h3 class="text-4xl font-bold tracking-tight">The Future of <br/>SaaS Management</h3>
+</div>
+</div>
+<div class="md:col-span-4 flex flex-col gap-6">
+<div class="h-1/2 relative overflow-hidden rounded-2xl group">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="vintage aesthetic electronic devices and retro computers in a dark room with subtle neon accents and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC87MOikSDONtPKgnd-jBgc_dhbpFHQk3zEJeHOEN9NBWSQYwfP84IT6Ol9VmIeZLS6TSfB0Yv2NQxBhq4-AEEU59Y43bbM9FQeb_PQhH57sRlZWsYuXZg1jhbGBcXbXdWFpGaAhhE3kRPUr8EZYUBEbnMLD1Ob2Acag_1hrSKuH6DZVLQPsBygDixvJHA_-_aiX6sVhlKr3IGrrR5nRqfJIi7Fi2vD3OJPO0pLnYKlD8sEWYP8ocRYayZFdv2iuzFCv8qIlF84T8YA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<h3 class="text-2xl font-bold tracking-tight">Legacy Vault</h3>
+</div>
+</div>
+<div class="h-1/2 bg-surface-container-high rounded-2xl p-8 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl text-primary-fixed mb-6">workspace_premium</span>
+<h3 class="text-2xl font-bold leading-tight">Join the top <br/>1% of savers.</h3>
+</div>
+<p class="text-on-surface-variant text-sm">Our members save an average of $640 annually by auditing their digital ecosystem.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="mt-48 py-32 bg-surface-container-low">
+<div class="max-w-4xl mx-auto px-8 text-center">
+<h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-8">Ready to curate?</h2>
+<p class="text-xl text-on-surface-variant mb-12">No spreadsheets. No stress. Just your digital life, beautifully organized.</p>
+<div class="flex flex-col md:flex-row justify-center gap-4">
+<button class="bg-primary text-on-primary px-10 py-5 rounded-full text-lg font-bold transition-all hover:shadow-[0_0_50px_rgba(198,198,199,0.2)]">
+                        Get Started Free
+                    </button>
+<button class="bg-surface-container-highest/50 backdrop-blur-lg border border-outline-variant/15 text-on-surface px-10 py-5 rounded-full text-lg font-bold hover:bg-surface-container-highest transition-all">
+                        View Demo
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-[#0e0e0f] dark:bg-[#0e0e0f] border-t border-[#48484b]/15">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto space-y-6 md:space-y-0">
+<div class="font-['Inter'] text-xs uppercase tracking-[0.05em] text-[#454747]">
+                © 2024 The Digital Curator. Designed for the cinematic lifestyle.
+            </div>
+<div class="flex gap-8 font-['Inter'] text-xs uppercase tracking-[0.05em]">
+<a class="text-[#454747] hover:text-[#c6c6c7] transition-colors" href="#">Privacy Policy</a>
+<a class="text-[#454747] hover:text-[#c6c6c7] transition-colors" href="#">Terms of Service</a>
+<a class="text-[#454747] hover:text-[#c6c6c7] transition-colors" href="#">Cookie Settings</a>
+<a class="text-[#454747] hover:text-[#c6c6c7] transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>

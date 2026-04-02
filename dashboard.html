@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | Premium Subscription Tracking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#3f4041",
+              "outline-variant": "#48484b",
+              "secondary-fixed-dim": "#ffc7c0",
+              "on-error-container": "#ff9993",
+              "on-secondary-fixed-variant": "#bb000c",
+              "tertiary-fixed-dim": "#63ef82",
+              "primary-dim": "#b8b9b9",
+              "error-dim": "#bb5551",
+              "surface": "#0e0e0f",
+              "on-primary-container": "#d0d0d0",
+              "inverse-surface": "#fcf8f9",
+              "surface-bright": "#2b2c2f",
+              "on-secondary-fixed": "#850005",
+              "on-tertiary-container": "#005f26",
+              "on-primary-fixed-variant": "#5a5c5c",
+              "primary-fixed": "#e2e2e2",
+              "secondary-container": "#7e0005",
+              "surface-container-low": "#131315",
+              "surface-container-high": "#1f1f22",
+              "tertiary-dim": "#63ef82",
+              "on-secondary": "#4a0002",
+              "primary": "#c6c6c7",
+              "surface-dim": "#0e0e0f",
+              "on-background": "#e7e5e8",
+              "tertiary-container": "#72fe8f",
+              "on-secondary-container": "#ffa99e",
+              "error-container": "#7f2927",
+              "secondary-dim": "#ff7162",
+              "secondary-fixed": "#ffdad5",
+              "on-tertiary-fixed-variant": "#006a2b",
+              "tertiary-fixed": "#72fe8f",
+              "surface-container-lowest": "#000000",
+              "on-tertiary": "#00692a",
+              "surface-container": "#19191b",
+              "on-error": "#490106",
+              "surface-variant": "#252628",
+              "tertiary": "#c6ffc7",
+              "surface-container-highest": "#252628",
+              "inverse-primary": "#5e5f60",
+              "secondary": "#ff7162",
+              "on-tertiary-fixed": "#004a1c",
+              "primary-container": "#454747",
+              "outline": "#767578",
+              "on-surface-variant": "#acaaae",
+              "surface-tint": "#c6c6c7",
+              "error": "#ee7d77",
+              "background": "#0e0e0f",
+              "primary-fixed-dim": "#d4d4d4",
+              "on-surface": "#e7e5e8",
+              "on-primary-fixed": "#3e4040",
+              "inverse-on-surface": "#565556"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0e0e0f;
+            color: #e7e5e8;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(43, 44, 47, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .text-glow-error {
+            text-shadow: 0 0 15px rgba(238, 125, 119, 0.4);
+        }
+        .premium-gradient {
+            background: linear-gradient(135deg, #c6c6c7 0%, #454747 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-zinc-950/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex justify-between items-center px-8 h-20 w-full max-w-none font-['Inter'] tracking-tight antialiased">
+<div class="text-xl font-bold tracking-tighter text-zinc-100">The Curator</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-zinc-100 border-b-2 border-zinc-100 pb-1" href="#">Dashboard</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="#">Archive</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-zinc-100 hover:bg-zinc-800/50 transition-all duration-300 ease-[cubic-bezier(0.2,0,0,1)] active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/20">
+<img alt="User Profile" data-alt="close-up portrait of a professional individual with soft studio lighting and a neutral blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPKGwXEm_NoFj69esLUH1wKIViD_Zz6x7zBWmaBaPnKZ2KZyi83j1968nn3hLhEcXJNAEilYJtnfHoORTEgwDuEI9USOvpt4XlXAdK5kfp_EPSueEdYkLyuJEXIokVMOHXrK6qUqOWMeZy1J3GM6m3-P6wwajEaSDHESvYBNlhT6LuM_juvRuEIp21X5UxUlwXUwZwysh7v6rF_Jyt_AfAPevM5VEZagJTK8AFYH2DEFhYm_dMeCo2cP_NrjJdr0XRpK7_mV5NAcyM"/>
+</div>
+</div>
+</nav>
+<main class="flex-grow pt-32 pb-24 px-8 max-w-7xl mx-auto w-full">
+<!-- Hero: Spend Section -->
+<section class="mb-20 relative overflow-hidden">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="space-y-2">
+<span class="text-xs font-medium uppercase tracking-[0.15em] text-on-surface-variant font-label">Current Monthly Allocation</span>
+<h1 class="text-7xl md:text-8xl font-black tracking-tighter text-on-surface">
+                        $142.84
+                    </h1>
+</div>
+<div class="w-full md:w-96 space-y-4">
+<div class="flex justify-between items-center text-sm font-medium">
+<span class="text-on-surface-variant">Monthly Limit: $200.00</span>
+<span class="text-primary">71%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-secondary-dim w-[71%] rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Subscriptions: Asymmetric Bento Grid -->
+<section class="mb-20">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-bold tracking-tight">Active Subscriptions</h2>
+<button class="text-sm font-semibold text-primary hover:text-on-surface transition-colors flex items-center gap-2">
+                    View Gallery <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Netflix Card -->
+<div class="md:col-span-2 glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-0 right-0 w-48 h-48 bg-red-600/10 blur-[60px] -mr-20 -mt-20 group-hover:bg-red-600/20 transition-all"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center text-red-600 font-bold text-xl">N</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span>
+</div>
+<div class="mt-12">
+<h3 class="text-2xl font-bold tracking-tight">Netflix</h3>
+<p class="text-on-surface-variant text-sm mt-1">Premium 4K Ultra HD</p>
+</div>
+<div class="mt-6 flex items-baseline gap-1">
+<span class="text-4xl font-bold tracking-tighter">$19.99</span>
+<span class="text-on-surface-variant text-sm">/mo</span>
+</div>
+</div>
+</div>
+<!-- Spotify Card -->
+<div class="glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-[40px] -mr-12 -mt-12 group-hover:bg-emerald-500/20 transition-all"></div>
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-tertiary-fixed text-4xl" data-icon="settings_voice">settings_voice</span>
+</div>
+<div class="mt-8">
+<h3 class="text-xl font-bold tracking-tight">Spotify</h3>
+<p class="text-on-surface-variant text-xs mt-1">Family Premium</p>
+<p class="text-2xl font-bold tracking-tighter mt-4">$16.99</p>
+</div>
+</div>
+</div>
+<!-- Amazon Card -->
+<div class="glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-0 right-0 w-32 h-32 bg-sky-400/10 blur-[40px] -mr-12 -mt-12 group-hover:bg-sky-400/20 transition-all"></div>
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-blue-400 text-4xl" data-icon="package_2">package_2</span>
+</div>
+<div class="mt-8">
+<h3 class="text-xl font-bold tracking-tight">Amazon Prime</h3>
+<p class="text-on-surface-variant text-xs mt-1">Video + Delivery</p>
+<p class="text-2xl font-bold tracking-tighter mt-4">$14.99</p>
+</div>
+</div>
+</div>
+<!-- Disney+ Card -->
+<div class="md:col-span-2 glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute top-0 right-0 w-48 h-48 bg-indigo-600/10 blur-[60px] -mr-20 -mt-20 group-hover:bg-indigo-600/20 transition-all"></div>
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-indigo-400 text-4xl" data-icon="movie">movie</span>
+<div class="flex gap-2">
+<span class="bg-surface-container-highest/60 text-[10px] uppercase tracking-wider px-2 py-1 rounded">Marvel</span>
+<span class="bg-surface-container-highest/60 text-[10px] uppercase tracking-wider px-2 py-1 rounded">Star Wars</span>
+</div>
+</div>
+<div class="mt-12">
+<h3 class="text-2xl font-bold tracking-tight">Disney+</h3>
+<p class="text-2xl font-bold tracking-tighter mt-2">$13.99 <span class="text-sm font-normal text-on-surface-variant">/mo</span></p>
+</div>
+</div>
+</div>
+<!-- Empty state/Placeholder for layout balance -->
+<div class="md:col-span-2 border border-dashed border-outline-variant/20 rounded-xl flex items-center justify-center p-8">
+<div class="text-center">
+<p class="text-on-surface-variant text-sm mb-4">Discover more services based on your interests</p>
+<button class="text-xs font-bold uppercase tracking-widest text-primary border border-primary/20 px-6 py-3 rounded-full hover:bg-primary/10 transition-all">Explore Marketplace</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Upcoming Payments: Timeline -->
+<section class="mb-20">
+<h2 class="text-2xl font-bold tracking-tight mb-8">Upcoming Payments</h2>
+<div class="bg-surface-container-low rounded-2xl p-4 md:p-8 space-y-6">
+<!-- Highlighted Item: HBO Max -->
+<div class="flex items-center gap-6 p-6 bg-surface-container-high rounded-xl border-l-4 border-error relative overflow-hidden">
+<div class="absolute inset-0 bg-error/5 pointer-events-none"></div>
+<div class="flex-shrink-0 w-14 h-14 bg-error-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-3xl" data-icon="warning">warning</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-1">
+<h4 class="text-lg font-bold">HBO Max</h4>
+<span class="text-error font-black text-xl text-glow-error">$15.99</span>
+</div>
+<p class="text-on-surface-variant text-sm flex items-center gap-2">
+<span class="text-error font-bold">Due in 2 days</span> • Autopay active
+                        </p>
+</div>
+</div>
+<!-- Regular Item -->
+<div class="flex items-center gap-6 p-6 border-b border-outline-variant/10">
+<div class="flex-shrink-0 w-14 h-14 bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl" data-icon="language">language</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-1">
+<h4 class="text-lg font-bold">New York Times</h4>
+<span class="text-on-surface-variant font-bold text-xl">$4.00</span>
+</div>
+<p class="text-on-surface-variant text-sm">Due in 5 days • Monthly Digital</p>
+</div>
+</div>
+<!-- Regular Item -->
+<div class="flex items-center gap-6 p-6">
+<div class="flex-shrink-0 w-14 h-14 bg-surface-container-highest rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl" data-icon="code">code</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-1">
+<h4 class="text-lg font-bold">GitHub Copilot</h4>
+<span class="text-on-surface-variant font-bold text-xl">$10.00</span>
+</div>
+<p class="text-on-surface-variant text-sm">Due in 12 days • Professional Plan</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<a href="/add-subscription.html" class="fixed bottom-12 right-12 premium-gradient text-on-primary-fixed font-bold py-4 px-8 rounded-full flex items-center gap-3 shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 active:scale-95 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform duration-300" data-icon="add">add</span>
+<span>Add Subscription</span>
+</a>
+<!-- Footer -->
+<footer class="bg-zinc-950 w-full py-12 px-8 mt-auto flex flex-col md:flex-row justify-between items-center gap-6 border-t border-zinc-900">
+<div class="text-xs font-medium uppercase tracking-widest font-['Inter'] text-zinc-400">
+            © 2024 The Curator. Digital Excellence.
+        </div>
+<div class="flex gap-8">
+<a class="text-xs font-medium uppercase tracking-widest font-['Inter'] text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Privacy</a>
+<a class="text-xs font-medium uppercase tracking-widest font-['Inter'] text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Terms</a>
+<a class="text-xs font-medium uppercase tracking-widest font-['Inter'] text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Support</a>
+<a class="text-xs font-medium uppercase tracking-widest font-['Inter'] text-zinc-500 hover:text-zinc-200 transition-colors" href="#">API</a>
+</div>
+</footer>
+</body></html>

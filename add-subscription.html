@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | Add Subscription</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#131315",
+                        "on-primary-container": "#d0d0d0",
+                        "primary-dim": "#b8b9b9",
+                        "error-container": "#7f2927",
+                        "secondary": "#ff7162",
+                        "surface": "#0e0e0f",
+                        "on-tertiary-fixed": "#004a1c",
+                        "on-error-container": "#ff9993",
+                        "inverse-primary": "#5e5f60",
+                        "outline": "#767578",
+                        "surface-container-highest": "#252628",
+                        "on-surface-variant": "#acaaae",
+                        "on-secondary-fixed": "#850005",
+                        "on-secondary-container": "#ffa99e",
+                        "primary-fixed-dim": "#d4d4d4",
+                        "on-tertiary": "#00692a",
+                        "surface-tint": "#c6c6c7",
+                        "inverse-on-surface": "#565556",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-container": "#19191b",
+                        "on-secondary": "#4a0002",
+                        "on-background": "#e7e5e8",
+                        "tertiary-fixed-dim": "#63ef82",
+                        "primary": "#c6c6c7",
+                        "tertiary": "#c6ffc7",
+                        "tertiary-container": "#72fe8f",
+                        "background": "#0e0e0f",
+                        "on-error": "#490106",
+                        "surface-variant": "#252628",
+                        "secondary-dim": "#ff7162",
+                        "surface-bright": "#2b2c2f",
+                        "secondary-fixed": "#ffdad5",
+                        "error-dim": "#bb5551",
+                        "surface-container-lowest": "#000000",
+                        "secondary-container": "#7e0005",
+                        "on-tertiary-fixed-variant": "#006a2b",
+                        "on-tertiary-container": "#005f26",
+                        "tertiary-fixed": "#72fe8f",
+                        "on-primary-fixed": "#3e4040",
+                        "on-primary-fixed-variant": "#5a5c5c",
+                        "primary-container": "#454747",
+                        "surface-dim": "#0e0e0f",
+                        "tertiary-dim": "#63ef82",
+                        "outline-variant": "#48484b",
+                        "surface-container-high": "#1f1f22",
+                        "secondary-fixed-dim": "#ffc7c0",
+                        "inverse-surface": "#fcf8f9",
+                        "on-secondary-fixed-variant": "#bb000c",
+                        "on-surface": "#e7e5e8",
+                        "error": "#ee7d77",
+                        "on-primary": "#3f4041"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0e0e0f;
+            color: #e7e5e8;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(43, 44, 47, 0.4);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0e0e0f;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #252628;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- Top Navigation Bar (Shared Component Strategy) -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e0f]/80 backdrop-blur-2xl flex justify-between items-center px-6 h-16 w-full">
+<div class="text-xl font-bold tracking-tighter text-[#e7e5e8] font-['Inter']">The Curator</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-[#e7e5e8] hover:bg-[#1f1f22] transition-colors duration-300 p-2 rounded-full active:scale-95 transition-transform" data-icon="close">close</button>
+</div>
+</nav>
+<main class="pt-24 pb-32 px-6 max-w-4xl mx-auto min-h-screen">
+<!-- Header Section: Intentional Asymmetry -->
+<header class="mb-12 relative">
+<div class="absolute -left-12 -top-12 w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 text-on-surface relative">
+                Add <br/> <span class="text-primary-dim">Subscription</span>
+</h1>
+<p class="text-on-surface-variant font-medium tracking-wide uppercase text-xs">New Archive Entry</p>
+</header>
+<!-- Form Content -->
+<div class="space-y-16">
+<!-- Platform Selection: Bento Grid Style -->
+<section>
+<div class="flex justify-between items-end mb-6">
+<h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant">Select Platform</h2>
+<span class="text-[10px] text-primary underline cursor-pointer">Browse All</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Netflix -->
+<div class="group relative aspect-square glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 overflow-hidden active:scale-[0.98]">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#E50914]/20 blur-2xl group-hover:bg-[#E50914]/40 transition-colors"></div>
+<img alt="" class="w-20 relative z-10 filter brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Netflix red logo icon on dark minimal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHqrVlBu-UFljUNXb-Y-oVK-oZQXpBpUPGCUzLeZsnDuPTdCHX-iOMC4j3LZw7KqZpYBfrwBXSv4NRk2aJ9YrvdDe58TyH2SGTdMhBy-ScDe990DWy-lHuPqJ9BvVLi5ZXnzJXx9GjamPxVCZGTSE88WXltR9YkAl67-vp4vis6spm19eBWIRBeZgDGA3O8ho6g2Z6blYK77Xb0rIToohEQ0ak39S2FHyFrfdqfFd0kpAoFghpt27M30jjZMaYuQaFPxjTRE8kLNe2"/>
+<span class="mt-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface">Netflix</span>
+</div>
+<!-- Spotify -->
+<div class="group relative aspect-square glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 overflow-hidden active:scale-[0.98]">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#1DB954]/20 blur-2xl group-hover:bg-[#1DB954]/40 transition-colors"></div>
+<img alt="" class="w-12 relative z-10 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all" data-alt="Spotify green circle logo icon on dark minimal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApxWuWMgsQKCwmjkFgkDFciyISCBiwOSLy_zV4FBqN2h3nEdR2HGULF5aTA17AXpheaMxuv2g4c9Um5D2oevy-DWXfcVun3fBT7P4dwYRPwFp_ayKGXk2dF98VQnJI7WebYaF7htUvESqvehaREWOaWWmrgEoBpvvEEJifZyZsiZmQU2hCQfPJ0UL-s4U8cvqN4EIPlqyKOs-bI-a8qhM1_n2UyP6FUKJ89W1beraATIvC5RsXbsBSos5qveTGUbVUquZhts7TY3Vc"/>
+<span class="mt-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface">Spotify</span>
+</div>
+<!-- Prime -->
+<div class="group relative aspect-square glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 overflow-hidden active:scale-[0.98]">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#00A8E1]/20 blur-2xl group-hover:bg-[#00A8E1]/40 transition-colors"></div>
+<img alt="" class="w-16 relative z-10 filter brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Amazon Prime Video logo on dark minimal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_i7AB4JsbC-G5uFyxRNbygqcVfa43POXrg2l0jUJMdScylzrzL5qv7GjZY4T3qrlRy4C_6wWGjObI7RwGezAuWaG6as6MIRhUybUBjdw8Xsew6G3-w_yv1lJpeltoiIMLrO6twOzLT2O7-8t5sduRTWcGNCbgz-18hZnH_DVI6KYVN0Th5Yl1Ijj45ymRbecxYkKilwr1FZ0mna-fbTieh6-fPtvOpTSm56JCiJBdRSitMjN-TxhohPnA0I2bcZ35CPBibxlUaPd5"/>
+<span class="mt-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface">Prime Video</span>
+</div>
+<!-- Disney+ -->
+<div class="group relative aspect-square glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 overflow-hidden active:scale-[0.98]">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#64FFDA]/10 blur-2xl group-hover:bg-[#64FFDA]/20 transition-colors"></div>
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center relative z-10 border border-white/5">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary transition-colors" data-icon="add">add</span>
+</div>
+<span class="mt-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface">Custom</span>
+</div>
+</div>
+</section>
+<!-- Plan & Cycle Section: Grid for responsive flow -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Plan Selection -->
+<div>
+<h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Service Plan</h2>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 rounded-xl bg-surface-container-high border-l-4 border-primary cursor-pointer active:scale-[0.99] transition-transform">
+<div>
+<p class="text-sm font-bold">Standard</p>
+<p class="text-xs text-on-surface-variant">1080p + 2 Screens</p>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-xl bg-surface-container border-l-4 border-transparent hover:bg-surface-container-high cursor-pointer transition-colors">
+<div>
+<p class="text-sm font-bold">Premium</p>
+<p class="text-xs text-on-surface-variant">4K HDR + 4 Screens</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 rounded-xl bg-surface-container border-l-4 border-transparent hover:bg-surface-container-high cursor-pointer transition-colors">
+<div>
+<p class="text-sm font-bold">Basic</p>
+<p class="text-xs text-on-surface-variant">720p + 1 Screen</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Billing Cycle & Date -->
+<div class="space-y-12">
+<div>
+<h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Billing Cycle</h2>
+<div class="bg-surface-container rounded-full p-1.5 flex items-center">
+<button class="flex-1 py-2 text-xs font-bold uppercase tracking-widest bg-primary text-on-primary rounded-full transition-all">Monthly</button>
+<button class="flex-1 py-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all">Yearly</button>
+</div>
+</div>
+<div>
+<h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Next Billing Date</h2>
+<div class="bg-surface-container-high p-4 rounded-xl flex items-center justify-between border border-white/5">
+<span class="text-sm font-medium">May 24, 2024</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section: High Visual Impact -->
+<section class="relative py-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+<div class="flex-1">
+<h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-2">Subscription Price</h2>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-light text-on-surface-variant">$</span>
+<input class="bg-transparent border-none p-0 text-7xl font-extrabold tracking-tighter text-on-surface focus:ring-0 w-full" placeholder="0.00" type="text" value="15.49"/>
+</div>
+</div>
+<div class="flex items-center gap-3 glass-panel px-6 py-4 rounded-2xl border border-white/5 cursor-pointer hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<div class="text-left">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface">Auto-fill</p>
+<p class="text-[10px] text-on-surface-variant">Based on plan selection</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<footer class="pt-8 flex flex-col items-center">
+<button class="group relative w-full md:w-auto md:min-w-[300px] py-6 px-12 bg-primary text-on-primary rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(198,198,199,0.15)]">
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-primary-container opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<span class="relative z-10 text-sm font-extrabold uppercase tracking-[0.2em]">Curate Subscription</span>
+</button>
+<p class="mt-6 text-[10px] text-on-surface-variant font-medium tracking-widest uppercase opacity-50">Securely encrypted &amp; curated</p>
+</footer>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Suppressed on deep forms, but mapped here as requested by logic shells) -->
+<!-- Suppressed for this "Task-Focused" Close-button page per shell rules -->
+<div class="fixed bottom-0 left-0 w-full md:hidden h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+</body></html>
