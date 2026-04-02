@@ -274,7 +274,10 @@ Select a platform to view plans.
 <div class="fixed bottom-0 left-0 w-full md:hidden h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
 
 <script type="module">
-    axios.defaults.baseURL = 'http://localhost:5000/api';
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+        ? 'http://localhost:5000/api' 
+        : '/api';
+    axios.defaults.baseURL = API_URL;
     
     // Setup generic Interceptor
     axios.interceptors.request.use(config => {
