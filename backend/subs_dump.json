@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "69ce916eda786802c309b61f",
+    "userId": "69ce914eda786802c309b618",
+    "name": "Spotify",
+    "price": 1,
+    "billingCycle": "monthly",
+    "nextBillingDate": "2026-05-02T00:00:00.000Z",
+    "category": "Other",
+    "status": "active",
+    "createdAt": "2026-04-02T15:55:26.916Z",
+    "__v": 0
+  }
+]

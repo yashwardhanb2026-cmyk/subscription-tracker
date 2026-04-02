@@ -5,8 +5,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>The Curator | Add Subscription</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
@@ -114,8 +114,9 @@
 <!-- Header Section: Intentional Asymmetry -->
 <header class="mb-12 relative">
 <div class="absolute -left-12 -top-12 w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
-<h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 text-on-surface relative">
-                Add <br/> <span class="text-primary-dim">Subscription</span>
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 text-on-surface relative flex items-center flex-wrap gap-4">
+                <span>Add</span>
+                <input type="text" id="sub-name" class="bg-transparent border-b-2 border-white/20 p-0 text-5xl md:text-7xl font-extrabold text-primary-dim focus:border-primary focus:ring-0 placeholder-primary-dim/30 min-w-0" placeholder="Netflix..." />
 </h1>
 <p class="text-on-surface-variant font-medium tracking-wide uppercase text-xs">New Archive Entry</p>
 </header>
@@ -127,32 +128,84 @@
 <h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant">Select Platform</h2>
 <span class="text-[10px] text-primary underline cursor-pointer">Browse All</span>
 </div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="flex flex-wrap gap-4" id="platform-grid">
 <!-- Netflix -->
-<div class="group relative aspect-square glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 overflow-hidden active:scale-[0.98]">
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#E50914]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="Netflix">
 <div class="absolute top-0 right-0 w-16 h-16 bg-[#E50914]/20 blur-2xl group-hover:bg-[#E50914]/40 transition-colors"></div>
-<img alt="" class="w-20 relative z-10 filter brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Netflix red logo icon on dark minimal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHqrVlBu-UFljUNXb-Y-oVK-oZQXpBpUPGCUzLeZsnDuPTdCHX-iOMC4j3LZw7KqZpYBfrwBXSv4NRk2aJ9YrvdDe58TyH2SGTdMhBy-ScDe990DWy-lHuPqJ9BvVLi5ZXnzJXx9GjamPxVCZGTSE88WXltR9YkAl67-vp4vis6spm19eBWIRBeZgDGA3O8ho6g2Z6blYK77Xb0rIToohEQ0ak39S2FHyFrfdqfFd0kpAoFghpt27M30jjZMaYuQaFPxjTRE8kLNe2"/>
-<span class="mt-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface">Netflix</span>
-</div>
-<!-- Spotify -->
-<div class="group relative aspect-square glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 overflow-hidden active:scale-[0.98]">
-<div class="absolute top-0 right-0 w-16 h-16 bg-[#1DB954]/20 blur-2xl group-hover:bg-[#1DB954]/40 transition-colors"></div>
-<img alt="" class="w-12 relative z-10 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all" data-alt="Spotify green circle logo icon on dark minimal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApxWuWMgsQKCwmjkFgkDFciyISCBiwOSLy_zV4FBqN2h3nEdR2HGULF5aTA17AXpheaMxuv2g4c9Um5D2oevy-DWXfcVun3fBT7P4dwYRPwFp_ayKGXk2dF98VQnJI7WebYaF7htUvESqvehaREWOaWWmrgEoBpvvEEJifZyZsiZmQU2hCQfPJ0UL-s4U8cvqN4EIPlqyKOs-bI-a8qhM1_n2UyP6FUKJ89W1beraATIvC5RsXbsBSos5qveTGUbVUquZhts7TY3Vc"/>
-<span class="mt-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface">Spotify</span>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#E50914] transition-colors" data-icon="play_circle">play_circle</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">Netflix</span>
 </div>
 <!-- Prime -->
-<div class="group relative aspect-square glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 overflow-hidden active:scale-[0.98]">
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#00A8E1]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="Amazon Prime">
 <div class="absolute top-0 right-0 w-16 h-16 bg-[#00A8E1]/20 blur-2xl group-hover:bg-[#00A8E1]/40 transition-colors"></div>
-<img alt="" class="w-16 relative z-10 filter brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Amazon Prime Video logo on dark minimal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_i7AB4JsbC-G5uFyxRNbygqcVfa43POXrg2l0jUJMdScylzrzL5qv7GjZY4T3qrlRy4C_6wWGjObI7RwGezAuWaG6as6MIRhUybUBjdw8Xsew6G3-w_yv1lJpeltoiIMLrO6twOzLT2O7-8t5sduRTWcGNCbgz-18hZnH_DVI6KYVN0Th5Yl1Ijj45ymRbecxYkKilwr1FZ0mna-fbTieh6-fPtvOpTSm56JCiJBdRSitMjN-TxhohPnA0I2bcZ35CPBibxlUaPd5"/>
-<span class="mt-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface">Prime Video</span>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#00A8E1] transition-colors" data-icon="shopping_bag">shopping_bag</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">Prime</span>
 </div>
-<!-- Disney+ -->
-<div class="group relative aspect-square glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 overflow-hidden active:scale-[0.98]">
-<div class="absolute top-0 right-0 w-16 h-16 bg-[#64FFDA]/10 blur-2xl group-hover:bg-[#64FFDA]/20 transition-colors"></div>
-<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center relative z-10 border border-white/5">
-<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary transition-colors" data-icon="add">add</span>
+<!-- Hotstar -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#211F7F]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="Disney+ Hotstar">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#211F7F]/20 blur-2xl group-hover:bg-[#211F7F]/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#64FFDA] transition-colors" data-icon="star">star</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">Hotstar</span>
 </div>
-<span class="mt-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface">Custom</span>
+<!-- JioCinema -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#E42575]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="JioCinema Premium">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#E42575]/20 blur-2xl group-hover:bg-[#E42575]/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#E42575] transition-colors" data-icon="movie_filter">movie_filter</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">JioCinema</span>
+</div>
+<!-- Sony LIV -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#FF8200]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="Sony LIV">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#FF8200]/20 blur-2xl group-hover:bg-[#FF8200]/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#FF8200] transition-colors" data-icon="sports_esports">sports_esports</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">Sony LIV</span>
+</div>
+<!-- ZEE5 -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#8230C6]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="ZEE5">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#8230C6]/20 blur-2xl group-hover:bg-[#8230C6]/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#8230C6] transition-colors" data-icon="theaters">theaters</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">ZEE5</span>
+</div>
+<!-- Apple TV+ -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-white/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="Apple TV+">
+<div class="absolute top-0 right-0 w-16 h-16 bg-white/10 blur-2xl group-hover:bg-white/20 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-white transition-colors" data-icon="laptop_mac">laptop_mac</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">Apple TV+</span>
+</div>
+<!-- Spotify -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#1DB954]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="Spotify">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#1DB954]/20 blur-2xl group-hover:bg-[#1DB954]/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#1DB954] transition-colors" data-icon="headphones">headphones</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">Spotify</span>
+</div>
+<!-- YouTube Premium -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#FF0000]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="YouTube Premium">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#FF0000]/20 blur-2xl group-hover:bg-[#FF0000]/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#FF0000] transition-colors" data-icon="smart_display">smart_display</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">YouTube</span>
+</div>
+<!-- MX Player -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-black/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="MX Player">
+<div class="absolute top-0 right-0 w-16 h-16 bg-blue-500/20 blur-2xl group-hover:bg-blue-500/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-blue-500 transition-colors" data-icon="play_arrow">play_arrow</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">MX Player</span>
+</div>
+<!-- ALTBalaji -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#FFA500]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="ALTBalaji">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#FFA500]/20 blur-2xl group-hover:bg-[#FFA500]/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#FFA500] transition-colors" data-icon="video_library">video_library</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">ALTBalaji</span>
+</div>
+<!-- Discovery+ -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-[#00A9E0]/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="Discovery+">
+<div class="absolute top-0 right-0 w-16 h-16 bg-[#00A9E0]/20 blur-2xl group-hover:bg-[#00A9E0]/40 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-[#00A9E0] transition-colors" data-icon="explore">explore</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">Discovery+</span>
+</div>
+<!-- Custom -->
+<div class="platform-btn group relative w-24 h-24 glass-panel rounded-2xl flex flex-col items-center justify-center cursor-pointer border border-white/5 hover:border-primary/80 transition-all duration-300 overflow-hidden active:scale-[0.98]" data-name="Custom">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-colors"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl text-on-surface-variant group-hover:text-primary transition-colors" data-icon="edit">edit</span>
+<span class="mt-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface text-center">Custom</span>
 </div>
 </div>
 </section>
@@ -161,25 +214,10 @@
 <!-- Plan Selection -->
 <div>
 <h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Service Plan</h2>
-<div class="space-y-3">
-<div class="flex items-center justify-between p-4 rounded-xl bg-surface-container-high border-l-4 border-primary cursor-pointer active:scale-[0.99] transition-transform">
-<div>
-<p class="text-sm font-bold">Standard</p>
-<p class="text-xs text-on-surface-variant">1080p + 2 Screens</p>
-</div>
-<span class="material-symbols-outlined text-primary" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</div>
-<div class="flex items-center justify-between p-4 rounded-xl bg-surface-container border-l-4 border-transparent hover:bg-surface-container-high cursor-pointer transition-colors">
-<div>
-<p class="text-sm font-bold">Premium</p>
-<p class="text-xs text-on-surface-variant">4K HDR + 4 Screens</p>
-</div>
-</div>
-<div class="flex items-center justify-between p-4 rounded-xl bg-surface-container border-l-4 border-transparent hover:bg-surface-container-high cursor-pointer transition-colors">
-<div>
-<p class="text-sm font-bold">Basic</p>
-<p class="text-xs text-on-surface-variant">720p + 1 Screen</p>
-</div>
+<div class="space-y-3" id="service-plan-container">
+<!-- Dynamically populated by JS -->
+<div class="p-4 rounded-xl border border-dashed border-outline-variant/20 text-center text-on-surface-variant text-sm">
+Select a platform to view plans.
 </div>
 </div>
 </div>
@@ -188,15 +226,15 @@
 <div>
 <h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Billing Cycle</h2>
 <div class="bg-surface-container rounded-full p-1.5 flex items-center">
-<button class="flex-1 py-2 text-xs font-bold uppercase tracking-widest bg-primary text-on-primary rounded-full transition-all">Monthly</button>
-<button class="flex-1 py-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all">Yearly</button>
+<button id="btn-monthly" type="button" class="flex-1 py-2 text-xs font-bold uppercase tracking-widest bg-primary text-on-primary rounded-full transition-all">Monthly</button>
+<button id="btn-yearly" type="button" class="flex-1 py-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all">Yearly</button>
 </div>
 </div>
 <div>
 <h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Next Billing Date</h2>
 <div class="bg-surface-container-high p-4 rounded-xl flex items-center justify-between border border-white/5">
-<span class="text-sm font-medium">May 24, 2024</span>
-<span class="material-symbols-outlined text-on-surface-variant" data-icon="calendar_today">calendar_today</span>
+<input type="date" id="sub-date" required class="bg-transparent text-sm font-medium focus:outline-none focus:ring-0 border-none w-full text-on-surface p-0" />
+<span class="material-symbols-outlined text-on-surface-variant ml-2" data-icon="calendar_today">calendar_today</span>
 </div>
 </div>
 </div>
@@ -206,9 +244,10 @@
 <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
 <div class="flex-1">
 <h2 class="text-sm font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-2">Subscription Price</h2>
+<p id="error-msg" class="text-error text-xs font-bold mb-2 hidden"></p>
 <div class="flex items-baseline gap-2">
-<span class="text-3xl font-light text-on-surface-variant">$</span>
-<input class="bg-transparent border-none p-0 text-7xl font-extrabold tracking-tighter text-on-surface focus:ring-0 w-full" placeholder="0.00" type="text" value="15.49"/>
+<span class="text-3xl font-light text-on-surface-variant">₹</span>
+<input id="sub-price" class="bg-transparent border-b-2 border-transparent hover:border-white/10 focus:border-primary p-0 text-7xl font-extrabold tracking-tighter text-on-surface focus:ring-0 w-full transition-colors" placeholder="0" type="number" step="1" value=""/>
 </div>
 </div>
 <div class="flex items-center gap-3 glass-panel px-6 py-4 rounded-2xl border border-white/5 cursor-pointer hover:bg-surface-container-highest transition-colors">
@@ -222,7 +261,7 @@
 </section>
 <!-- CTA Section -->
 <footer class="pt-8 flex flex-col items-center">
-<button class="group relative w-full md:w-auto md:min-w-[300px] py-6 px-12 bg-primary text-on-primary rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(198,198,199,0.15)]">
+<button id="submit-btn" class="group relative w-full md:w-auto md:min-w-[300px] py-6 px-12 bg-primary text-on-primary rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(198,198,199,0.15)]">
 <div class="absolute inset-0 bg-gradient-to-r from-primary to-primary-container opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 <span class="relative z-10 text-sm font-extrabold uppercase tracking-[0.2em]">Curate Subscription</span>
 </button>
@@ -233,4 +272,211 @@
 <!-- Bottom Navigation Bar (Suppressed on deep forms, but mapped here as requested by logic shells) -->
 <!-- Suppressed for this "Task-Focused" Close-button page per shell rules -->
 <div class="fixed bottom-0 left-0 w-full md:hidden h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+
+<script type="module">
+    axios.defaults.baseURL = 'http://localhost:5000/api';
+    
+    // Setup generic Interceptor
+    axios.interceptors.request.use(config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    });
+    
+    // Auth Guard
+    if (!localStorage.getItem('token')) {
+        window.location.href = '/index.html';
+    }
+
+    // State
+    const theForm = {
+        name: '',
+        price: '',
+        billingCycle: 'monthly',
+        nextBillingDate: new Date().toISOString().split('T')[0] // default today
+    };
+
+    // Elements
+    const nameInput = document.getElementById('sub-name');
+    const priceInput = document.getElementById('sub-price');
+    const dateInput = document.getElementById('sub-date');
+    const btnMonthly = document.getElementById('btn-monthly');
+    const btnYearly = document.getElementById('btn-yearly');
+    const platformBtns = document.querySelectorAll('.platform-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const errorMsg = document.getElementById('error-msg');
+
+    // Initialize Date
+    dateInput.value = theForm.nextBillingDate;
+
+    // Knowledge Base for Pricing (INR)
+    const db = {
+        "Netflix": [
+            { id: "n0", name: "Mobile", desc: "Phone + Tablet", price: 149, cycle: "monthly" },
+            { id: "n1", name: "Basic", desc: "720p + 1 Screen", price: 199, cycle: "monthly" },
+            { id: "n2", name: "Standard", desc: "1080p + 2 Screens", price: 499, cycle: "monthly" },
+            { id: "n3", name: "Premium", desc: "4K HDR + 4 Screens", price: 649, cycle: "monthly" }
+        ],
+        "Spotify": [
+            { id: "s0", name: "Student", desc: "Student Premium", price: 59, cycle: "monthly" },
+            { id: "s1", name: "Individual", desc: "1 Premium Account", price: 119, cycle: "monthly" },
+            { id: "s2", name: "Duo", desc: "2 Premium Accounts", price: 149, cycle: "monthly" },
+            { id: "s3", name: "Family", desc: "Up to 6 Accounts", price: 179, cycle: "monthly" }
+        ],
+        "Amazon Prime": [
+            { id: "a1", name: "Prime Monthly", desc: "Video + Delivery", price: 299, cycle: "monthly" },
+            { id: "a2", name: "Prime Yearly", desc: "Video + Delivery", price: 1499, cycle: "yearly" }
+        ],
+        "Disney+ Hotstar": [
+            { id: "d0", name: "Mobile", desc: "720p Mobile devices", price: 499, cycle: "yearly" },
+            { id: "d1", name: "Super", desc: "1080p + Ads", price: 899, cycle: "yearly" },
+            { id: "d2", name: "Premium", desc: "4K Ad-Free", price: 1499, cycle: "yearly" }
+        ],
+        "JioCinema Premium": [
+            { id: "j1", name: "Monthly", desc: "HBO + Sports", price: 99, cycle: "monthly" },
+            { id: "j2", name: "Yearly", desc: "HBO + Sports", price: 999, cycle: "yearly" }
+        ],
+        "Sony LIV": [
+            { id: "l1", name: "Monthly", desc: "Sports + Originals", price: 399, cycle: "monthly" },
+            { id: "l2", name: "Yearly", desc: "Sports + Originals", price: 1499, cycle: "yearly" }
+        ],
+        "ZEE5": [
+            { id: "z1", name: "Monthly", desc: "Ad-free Full Access", price: 299, cycle: "monthly" },
+            { id: "z2", name: "Yearly", desc: "Ad-free Full Access", price: 999, cycle: "yearly" }
+        ],
+        "Apple TV+": [
+            { id: "ap1", name: "Standard", desc: "Apple Originals", price: 99, cycle: "monthly" }
+        ],
+        "YouTube Premium": [
+            { id: "y1", name: "Student", desc: "Ad-free + Music", price: 79, cycle: "monthly" },
+            { id: "y2", name: "Individual", desc: "Ad-free + Music", price: 129, cycle: "monthly" },
+            { id: "y3", name: "Family", desc: "Up to 5 members", price: 189, cycle: "monthly" }
+        ],
+        "MX Player": [
+            { id: "mx1", name: "Gold Yearly", desc: "Ad-free Premium", price: 299, cycle: "yearly" }
+        ],
+        "ALTBalaji": [
+            { id: "alt1", name: "Yearly", desc: "Ad-free Originals", price: 300, cycle: "yearly" }
+        ],
+        "Discovery+": [
+            { id: "ds1", name: "Monthly", desc: "Docs & Reality TV", price: 199, cycle: "monthly" },
+            { id: "ds2", name: "Yearly", desc: "Docs & Reality TV", price: 999, cycle: "yearly" }
+        ],
+        "Custom": []
+    };
+
+    const container = document.getElementById('service-plan-container');
+
+    const updateCycleUI = (cycle) => {
+        theForm.billingCycle = cycle;
+        if(cycle === 'monthly') {
+            btnMonthly.className = 'flex-1 py-2 text-xs font-bold uppercase tracking-widest bg-primary text-on-primary rounded-full transition-all';
+            btnYearly.className = 'flex-1 py-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all';
+        } else {
+            btnYearly.className = 'flex-1 py-2 text-xs font-bold uppercase tracking-widest bg-primary text-on-primary rounded-full transition-all';
+            btnMonthly.className = 'flex-1 py-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all';
+        }
+    };
+
+    // Platform selection
+    platformBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update styling
+            platformBtns.forEach(b => b.classList.remove('border-primary'));
+            btn.classList.add('border-primary');
+            
+            const pName = btn.dataset.name;
+            const plans = db[pName];
+            
+            if (pName === 'Custom' || !plans || plans.length === 0) {
+                // Freeform mode
+                nameInput.value = '';
+                priceInput.value = '';
+                nameInput.focus();
+                container.innerHTML = `
+                    <div class="p-4 rounded-xl border border-dashed border-outline-variant/20 text-center text-on-surface-variant text-sm">
+                        Custom mode active. Enter name and price physically.
+                    </div>`;
+                return;
+            }
+
+            // Auto-populate
+            nameInput.value = pName;
+            container.innerHTML = '';
+            
+            plans.forEach((plan, idx) => {
+                const isSelected = idx === 0;
+                if(isSelected) {
+                    priceInput.value = plan.price;
+                    updateCycleUI(plan.cycle);
+                }
+                
+                const html = `
+                    <div id="plan-${plan.id}" class="plan-card flex items-center justify-between p-4 rounded-xl bg-surface-container ${isSelected ? 'border-l-4 border-primary bg-surface-container-high' : 'border-l-4 border-transparent hover:bg-surface-container-high'} cursor-pointer transition-colors" data-price="${plan.price}" data-cycle="${plan.cycle}">
+                        <div>
+                            <p class="text-sm font-bold">${plan.name}</p>
+                            <p class="text-xs text-on-surface-variant">${plan.desc}</p>
+                        </div>
+                        ${isSelected ? '<span class="material-symbols-outlined text-primary check-icon">check_circle</span>' : '<span class="material-symbols-outlined text-primary check-icon hidden">check_circle</span>'}
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+
+            // Bind click to new plans
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Reset all
+                    document.querySelectorAll('.plan-card').forEach(c => {
+                        c.classList.remove('border-primary', 'bg-surface-container-high');
+                        c.classList.add('border-transparent');
+                        c.querySelector('.check-icon').classList.add('hidden');
+                    });
+                    
+                    // Activate this
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-primary', 'bg-surface-container-high');
+                    this.querySelector('.check-icon').classList.remove('hidden');
+                    
+                    priceInput.value = this.dataset.price;
+                    updateCycleUI(this.dataset.cycle);
+                });
+            });
+        });
+    });
+
+    // Manual cycle toggles (can override plan defaults if they want to)
+    btnMonthly.addEventListener('click', () => updateCycleUI('monthly'));
+    btnYearly.addEventListener('click', () => updateCycleUI('yearly'));
+
+    submitBtn.addEventListener('click', async () => {
+        errorMsg.classList.add('hidden');
+        submitBtn.disabled = true;
+        
+        try {
+            const payload = {
+                name: nameInput.value || 'Custom App',
+                price: parseFloat(priceInput.value),
+                billingCycle: theForm.billingCycle,
+                nextBillingDate: dateInput.value
+            };
+            
+            if(!payload.price || isNaN(payload.price)) {
+                throw new Error("Valid price required.");
+            }
+
+            await axios.post('/subscriptions', payload);
+            window.location.href = '/dashboard.html';
+
+        } catch (err) {
+            errorMsg.textContent = err.message || err.response?.data?.error || "Failed to curate. Check fields.";
+            errorMsg.classList.remove('hidden');
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+
+</script>
 </body></html>

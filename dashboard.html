@@ -5,8 +5,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>The Curator | Premium Subscription Tracking</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
@@ -101,17 +101,16 @@
 <body class="min-h-screen flex flex-col">
 <!-- Navigation Shell -->
 <nav class="fixed top-0 w-full z-50 bg-zinc-950/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex justify-between items-center px-8 h-20 w-full max-w-none font-['Inter'] tracking-tight antialiased">
-<div class="text-xl font-bold tracking-tighter text-zinc-100">The Curator</div>
+<a href="index.html" class="text-xl font-bold tracking-tighter text-zinc-100 hover:text-white transition-colors cursor-pointer">The Curator</a>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-zinc-100 border-b-2 border-zinc-100 pb-1" href="#">Dashboard</a>
-<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="#">Archive</a>
-<a class="text-zinc-500 hover:text-zinc-300 transition-colors" href="#">Settings</a>
+<a class="text-zinc-100 border-b-2 border-zinc-100 pb-1" href="dashboard.html">Dashboard</a>
+<a class="text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer" onclick="openSettings()">Settings</a>
 </div>
 <div class="flex items-center gap-6">
 <button class="text-zinc-100 hover:bg-zinc-800/50 transition-all duration-300 ease-[cubic-bezier(0.2,0,0,1)] active:scale-95 p-2 rounded-full">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </button>
-<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/20">
+<div id="logout-btn" class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/20 cursor-pointer hover:opacity-80 transition-opacity" title="Logout">
 <img alt="User Profile" data-alt="close-up portrait of a professional individual with soft studio lighting and a neutral blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPKGwXEm_NoFj69esLUH1wKIViD_Zz6x7zBWmaBaPnKZ2KZyi83j1968nn3hLhEcXJNAEilYJtnfHoORTEgwDuEI9USOvpt4XlXAdK5kfp_EPSueEdYkLyuJEXIokVMOHXrK6qUqOWMeZy1J3GM6m3-P6wwajEaSDHESvYBNlhT6LuM_juvRuEIp21X5UxUlwXUwZwysh7v6rF_Jyt_AfAPevM5VEZagJTK8AFYH2DEFhYm_dMeCo2cP_NrjJdr0XRpK7_mV5NAcyM"/>
 </div>
 </div>
@@ -122,17 +121,17 @@
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
 <div class="space-y-2">
 <span class="text-xs font-medium uppercase tracking-[0.15em] text-on-surface-variant font-label">Current Monthly Allocation</span>
-<h1 class="text-7xl md:text-8xl font-black tracking-tighter text-on-surface">
-                        $142.84
+<h1 id="monthly-allocation" class="text-7xl md:text-8xl font-black tracking-tighter text-on-surface">
+                        $0.00
                     </h1>
 </div>
 <div class="w-full md:w-96 space-y-4">
 <div class="flex justify-between items-center text-sm font-medium">
-<span class="text-on-surface-variant">Monthly Limit: $200.00</span>
-<span class="text-primary">71%</span>
+<span class="text-on-surface-variant flex gap-1 items-center">Monthly Limit: <span id="limit-text" class="cursor-pointer border-b border-dashed border-primary/50 hover:text-primary transition-colors" title="Click to change your limit" onclick="editLimit()">₹10,000</span></span>
+<span id="limit-percent" class="text-primary">0%</span>
 </div>
 <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-gradient-to-r from-secondary to-secondary-dim w-[71%] rounded-full"></div>
+<div id="limit-bar" class="h-full bg-gradient-to-r from-secondary to-secondary-dim w-[0%] rounded-full transition-all duration-1000"></div>
 </div>
 </div>
 </div>
@@ -141,131 +140,15 @@
 <section class="mb-20">
 <div class="flex items-center justify-between mb-8">
 <h2 class="text-2xl font-bold tracking-tight">Active Subscriptions</h2>
-<button class="text-sm font-semibold text-primary hover:text-on-surface transition-colors flex items-center gap-2">
+<button onclick="document.getElementById('subscriptions-container').scrollIntoView({ behavior: 'smooth', block: 'start' })" class="text-sm font-semibold text-primary hover:text-on-surface transition-colors flex items-center gap-2">
                     View Gallery <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
 </button>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-<!-- Netflix Card -->
-<div class="md:col-span-2 glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
-<div class="absolute top-0 right-0 w-48 h-48 bg-red-600/10 blur-[60px] -mr-20 -mt-20 group-hover:bg-red-600/20 transition-all"></div>
-<div class="relative z-10 h-full flex flex-col justify-between">
-<div class="flex justify-between items-start">
-<div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center text-red-600 font-bold text-xl">N</div>
-<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span>
-</div>
-<div class="mt-12">
-<h3 class="text-2xl font-bold tracking-tight">Netflix</h3>
-<p class="text-on-surface-variant text-sm mt-1">Premium 4K Ultra HD</p>
-</div>
-<div class="mt-6 flex items-baseline gap-1">
-<span class="text-4xl font-bold tracking-tighter">$19.99</span>
-<span class="text-on-surface-variant text-sm">/mo</span>
-</div>
-</div>
-</div>
-<!-- Spotify Card -->
-<div class="glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
-<div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-[40px] -mr-12 -mt-12 group-hover:bg-emerald-500/20 transition-all"></div>
-<div class="relative z-10 flex flex-col justify-between h-full">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-tertiary-fixed text-4xl" data-icon="settings_voice">settings_voice</span>
-</div>
-<div class="mt-8">
-<h3 class="text-xl font-bold tracking-tight">Spotify</h3>
-<p class="text-on-surface-variant text-xs mt-1">Family Premium</p>
-<p class="text-2xl font-bold tracking-tighter mt-4">$16.99</p>
-</div>
-</div>
-</div>
-<!-- Amazon Card -->
-<div class="glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
-<div class="absolute top-0 right-0 w-32 h-32 bg-sky-400/10 blur-[40px] -mr-12 -mt-12 group-hover:bg-sky-400/20 transition-all"></div>
-<div class="relative z-10 flex flex-col justify-between h-full">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-blue-400 text-4xl" data-icon="package_2">package_2</span>
-</div>
-<div class="mt-8">
-<h3 class="text-xl font-bold tracking-tight">Amazon Prime</h3>
-<p class="text-on-surface-variant text-xs mt-1">Video + Delivery</p>
-<p class="text-2xl font-bold tracking-tighter mt-4">$14.99</p>
-</div>
-</div>
-</div>
-<!-- Disney+ Card -->
-<div class="md:col-span-2 glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
-<div class="absolute top-0 right-0 w-48 h-48 bg-indigo-600/10 blur-[60px] -mr-20 -mt-20 group-hover:bg-indigo-600/20 transition-all"></div>
-<div class="relative z-10 flex flex-col justify-between h-full">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-indigo-400 text-4xl" data-icon="movie">movie</span>
-<div class="flex gap-2">
-<span class="bg-surface-container-highest/60 text-[10px] uppercase tracking-wider px-2 py-1 rounded">Marvel</span>
-<span class="bg-surface-container-highest/60 text-[10px] uppercase tracking-wider px-2 py-1 rounded">Star Wars</span>
-</div>
-</div>
-<div class="mt-12">
-<h3 class="text-2xl font-bold tracking-tight">Disney+</h3>
-<p class="text-2xl font-bold tracking-tighter mt-2">$13.99 <span class="text-sm font-normal text-on-surface-variant">/mo</span></p>
-</div>
-</div>
-</div>
-<!-- Empty state/Placeholder for layout balance -->
-<div class="md:col-span-2 border border-dashed border-outline-variant/20 rounded-xl flex items-center justify-center p-8">
-<div class="text-center">
-<p class="text-on-surface-variant text-sm mb-4">Discover more services based on your interests</p>
-<button class="text-xs font-bold uppercase tracking-widest text-primary border border-primary/20 px-6 py-3 rounded-full hover:bg-primary/10 transition-all">Explore Marketplace</button>
-</div>
-</div>
+<div id="subscriptions-container" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <!-- Subscriptions will be dynamically injected here -->
 </div>
 </section>
-<!-- Upcoming Payments: Timeline -->
-<section class="mb-20">
-<h2 class="text-2xl font-bold tracking-tight mb-8">Upcoming Payments</h2>
-<div class="bg-surface-container-low rounded-2xl p-4 md:p-8 space-y-6">
-<!-- Highlighted Item: HBO Max -->
-<div class="flex items-center gap-6 p-6 bg-surface-container-high rounded-xl border-l-4 border-error relative overflow-hidden">
-<div class="absolute inset-0 bg-error/5 pointer-events-none"></div>
-<div class="flex-shrink-0 w-14 h-14 bg-error-container rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-error text-3xl" data-icon="warning">warning</span>
-</div>
-<div class="flex-grow">
-<div class="flex justify-between items-center mb-1">
-<h4 class="text-lg font-bold">HBO Max</h4>
-<span class="text-error font-black text-xl text-glow-error">$15.99</span>
-</div>
-<p class="text-on-surface-variant text-sm flex items-center gap-2">
-<span class="text-error font-bold">Due in 2 days</span> • Autopay active
-                        </p>
-</div>
-</div>
-<!-- Regular Item -->
-<div class="flex items-center gap-6 p-6 border-b border-outline-variant/10">
-<div class="flex-shrink-0 w-14 h-14 bg-surface-container-highest rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant text-3xl" data-icon="language">language</span>
-</div>
-<div class="flex-grow">
-<div class="flex justify-between items-center mb-1">
-<h4 class="text-lg font-bold">New York Times</h4>
-<span class="text-on-surface-variant font-bold text-xl">$4.00</span>
-</div>
-<p class="text-on-surface-variant text-sm">Due in 5 days • Monthly Digital</p>
-</div>
-</div>
-<!-- Regular Item -->
-<div class="flex items-center gap-6 p-6">
-<div class="flex-shrink-0 w-14 h-14 bg-surface-container-highest rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant text-3xl" data-icon="code">code</span>
-</div>
-<div class="flex-grow">
-<div class="flex justify-between items-center mb-1">
-<h4 class="text-lg font-bold">GitHub Copilot</h4>
-<span class="text-on-surface-variant font-bold text-xl">$10.00</span>
-</div>
-<p class="text-on-surface-variant text-sm">Due in 12 days • Professional Plan</p>
-</div>
-</div>
-</div>
-</section>
+<!-- Upcoming Payments removed for now -->
 </main>
 <!-- Floating Action Button -->
 <a href="/add-subscription.html" class="fixed bottom-12 right-12 premium-gradient text-on-primary-fixed font-bold py-4 px-8 rounded-full flex items-center gap-3 shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 active:scale-95 group">
@@ -275,7 +158,7 @@
 <!-- Footer -->
 <footer class="bg-zinc-950 w-full py-12 px-8 mt-auto flex flex-col md:flex-row justify-between items-center gap-6 border-t border-zinc-900">
 <div class="text-xs font-medium uppercase tracking-widest font-['Inter'] text-zinc-400">
-            © 2024 The Curator. Digital Excellence.
+            © 2026 THE CURATOR. ENGINEERED BY YASHWARDHAN.
         </div>
 <div class="flex gap-8">
 <a class="text-xs font-medium uppercase tracking-widest font-['Inter'] text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Privacy</a>
@@ -284,4 +167,199 @@
 <a class="text-xs font-medium uppercase tracking-widest font-['Inter'] text-zinc-500 hover:text-zinc-200 transition-colors" href="#">API</a>
 </div>
 </footer>
+
+<!-- Settings Modal -->
+<div id="settings-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 antialiased">
+    <div class="glass-card w-full max-w-md p-8 pt-10 rounded-3xl border border-white/10 relative shadow-2xl transform scale-95 transition-transform duration-300" id="settings-card">
+        <button onclick="closeSettings()" class="absolute top-6 right-6 text-on-surface-variant hover:text-white transition-colors">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <div class="mb-8 flex flex-col items-center text-center">
+            <div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mb-4 border border-primary/50 shadow-[0_0_20px_rgba(var(--primary),0.3)] text-3xl font-bold uppercase text-primary" id="profile-initial">
+                ?
+            </div>
+            <h2 class="text-2xl font-bold tracking-tight" id="profile-name">Loading...</h2>
+            <p class="text-sm text-on-surface-variant font-mono mt-1" id="profile-email"></p>
+        </div>
+        
+        <div class="space-y-4 shadow-inner bg-black/30 p-6 rounded-2xl border border-white/5">
+            <div class="flex justify-between items-center">
+                <div>
+                   <h3 class="font-bold text-sm">Monthly Allocation</h3>
+                   <p class="text-[10px] text-on-surface-variant">Your spending threshold</p>
+                </div>
+                <button onclick="editLimit()" class="text-xs font-bold text-primary hover:text-white transition-colors border border-primary/50 px-4 py-2 rounded-full hover:bg-primary/20 shadow-md">Edit Limit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    axios.defaults.baseURL = 'http://localhost:5000/api';
+    
+    // Setup generic Interceptor
+    axios.interceptors.request.use(config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    });
+    
+    // Auth Guard
+    if (!localStorage.getItem('token')) {
+        window.location.href = '/index.html';
+    }
+
+    const logoutBtn = document.getElementById('logout-btn');
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('token');
+        window.location.href = '/index.html';
+    });
+
+    // Helper formatting (Indian Rupees)
+    const formatCurrency = (number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(number);
+
+    // Fetch and populate
+    async function initDashboard() {
+        try {
+            const summaryRes = await axios.get('/subscriptions/summary');
+            const monthlyTotal = summaryRes.data.data.totalMonthly || 0;
+            document.getElementById('monthly-allocation').textContent = formatCurrency(monthlyTotal);
+            
+            // Update Limit Bar
+            const monthlyLimit = parseFloat(localStorage.getItem('monthlyLimit')) || 10000;
+            document.getElementById('limit-text').textContent = formatCurrency(monthlyLimit);
+
+            const percentRaw = (monthlyTotal / monthlyLimit) * 100;
+            const percentDisplay = percentRaw > 0 && percentRaw < 1 ? parseFloat(percentRaw.toFixed(2)) : parseFloat(percentRaw.toFixed(1));
+            const percentWidth = Math.min(percentDisplay, 100);
+
+            document.getElementById('limit-percent').textContent = `${percentDisplay}%`;
+            document.getElementById('limit-bar').style.width = `${percentWidth}%`;
+
+            const subsRes = await axios.get('/subscriptions');
+            const container = document.getElementById('subscriptions-container');
+            container.innerHTML = '';
+            
+            const subs = subsRes.data.data;
+            if (subs.length === 0) {
+                container.innerHTML = `
+                    <div class="md:col-span-4 border border-dashed border-outline-variant/20 rounded-xl flex items-center justify-center p-12">
+                        <div class="text-center">
+                            <p class="text-on-surface-variant text-sm mb-4">Your vault is completely empty.</p>
+                            <a href="/add-subscription.html" class="inline-block text-xs font-bold uppercase tracking-widest text-primary border border-primary/20 px-6 py-3 rounded-full hover:bg-primary/10 transition-all">Add First Subscription</a>
+                        </div>
+                    </div>`;
+                return;
+            }
+
+            subs.forEach((sub, i) => {
+                // Dynamic colors based on index or name
+                const isWide = (i % 3 === 0);
+                const colSpanClass = isWide ? 'md:col-span-2' : '';
+                const baseColorMap = {
+                    'Netflix': 'red-600',
+                    'Spotify': 'emerald-500', 
+                    'Amazon': 'sky-400',
+                    'Disney': 'indigo-600'
+                };
+                
+                let hue = 'primary'; // fallback
+                Object.keys(baseColorMap).forEach(key => {
+                    if(sub.name.toLowerCase().includes(key.toLowerCase())) hue = baseColorMap[key];
+                });
+
+                container.insertAdjacentHTML('beforeend', `
+                    <div class="${colSpanClass} glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-300">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-${hue}/10 blur-[40px] -mr-12 -mt-12 group-hover:bg-${hue}/20 transition-all"></div>
+                        <div class="relative z-10 flex flex-col justify-between h-full">
+                            <div class="flex justify-between items-start">
+                                <span class="material-symbols-outlined text-${hue} text-4xl">subscriptions</span>
+                                <div class="flex gap-2 items-center">
+                                     ${sub.status === 'inactive' ? '<span class="bg-error/20 text-error text-[10px] uppercase tracking-wider px-2 py-1 rounded">Inactive</span>' : ''}
+                                     <button onclick="deleteSubscription('${sub._id}')" class="text-on-surface-variant hover:text-error transition-colors p-1 flex items-center justify-center rounded-full hover:bg-error/10" title="Delete Subscription">
+                                         <span class="material-symbols-outlined text-[16px]">delete</span>
+                                     </button>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <h3 class="text-2xl font-bold tracking-tight">${sub.name}</h3>
+                                <p class="text-on-surface-variant text-xs mt-1">${sub.category || 'General'}</p>
+                                <div class="mt-4 flex items-baseline gap-1">
+                                    <span class="text-3xl font-bold tracking-tighter">${formatCurrency(sub.price)}</span>
+                                    <span class="text-on-surface-variant text-sm">/${sub.billingCycle === 'yearly' ? 'yr' : 'mo'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+
+        } catch (err) {
+            console.error("Dashboard error:", err);
+            if (err.response?.status === 401) {
+                localStorage.removeItem('token');
+                window.location.href = '/index.html';
+            }
+        }
+    }
+
+    // EXPOSE GLOBAL FUNCTION TO HANDLE LIMIT CHANGE
+    window.editLimit = function() {
+        const currentLimit = localStorage.getItem('monthlyLimit') || 10000;
+        const newLimit = prompt("Enter your new custom monthly allocation limit (₹):", currentLimit);
+        if(newLimit && !isNaN(newLimit) && Number(newLimit) > 0) {
+            localStorage.setItem('monthlyLimit', Number(newLimit));
+            initDashboard(); // Reload visually
+        }
+    };
+
+    // EXPOSE GLOBAL FUNCTION TO HANDLE DELETION
+    window.deleteSubscription = async function(id) {
+        if(confirm("Delete this subscription? This action cannot be undone.")) {
+            try {
+                await axios.delete(`/subscriptions/${id}`);
+                initDashboard(); // Reload visually
+            } catch (err) {
+                console.error("Delete failed:", err);
+                alert("Could not delete subscription.");
+            }
+        }
+    };
+
+    // SETTINGS LOGIC
+    window.openSettings = async function() {
+        const modal = document.getElementById('settings-modal');
+        const card = document.getElementById('settings-card');
+        
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+
+        try {
+            const res = await axios.get('/auth/me'); // Automatically uses interceptor token
+            const user = res.data.data;
+            document.getElementById('profile-name').textContent = user.name;
+            document.getElementById('profile-email').textContent = user.email;
+            document.getElementById('profile-initial').textContent = user.name.charAt(0);
+        } catch(err) {
+            console.error("Failed to fetch profile", err);
+            document.getElementById('profile-name').textContent = "Unknown User";
+        }
+    };
+
+    window.closeSettings = function() {
+        const modal = document.getElementById('settings-modal');
+        const card = document.getElementById('settings-card');
+        modal.classList.add('opacity-0');
+        card.classList.add('scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+    };
+
+    initDashboard();
+
+</script>
 </body></html>
