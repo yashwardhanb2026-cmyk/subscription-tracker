@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR andw  some ESLint rulklnkn.
+This template provdes a minimal setup to get React working in Vite with HMR andw  some ESLint rulklnkn.
 Currently, two official plurgins are available:
 
 - [@vitejs/plugin-react](https://githcom/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
